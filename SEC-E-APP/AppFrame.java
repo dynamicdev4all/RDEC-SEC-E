@@ -1,12 +1,16 @@
 import javax.swing.JFrame;
 
-public class AppFrame extends JFrame {
-    AppFrame()    {
-        setTitle("MCA");
-        setSize(500,500);
-        setLocationRelativeTo(null);
+public class AppFrame implements AppConstants{
+
+    private JFrame frame;
+    LoadBundle lb;
+
+    AppFrame() {
+        frame.setTitle("MCA");
+        frame.setSize(FRAME_WIDTH, lb.readBundle("APP_HEIGHT"));
+        frame.setLocationRelativeTo(null);
         AppPanel appPanel = new AppPanel();
-        add(appPanel);
-        setVisible(true);
+        frame.add(appPanel);
+        frame.setVisible(true);
     }
 }
