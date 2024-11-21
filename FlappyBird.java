@@ -1,0 +1,92 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
+
+public class FlappyBird extends JPanel implements KeyListener {
+
+    private int birdX = 100;
+    private int birdY = 250;
+    private int birdSpeed = 0;
+    private int gravity = 1;
+    private int pipeX = 500;
+    private int pipeY = new Random().nextInt(200) + 100;
+    private int pipeSpeed = 5;
+    private int score = 0;
+    private boolean gameOver = false;
+
+    public FlappyBird() {
+        setFocusable(true);
+        requestFocus();
+        addKeyListener(this);
+        Timer timer = new Timer(1000 / 60, e -> updateGame());
+        timer.start();
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.CYAN);
+        g.fillRect(0, 0, 600, 600);
+
+        g.setColor(Color.BLACK);
+        g.fillRect(birdX, birdY, 30, 30);
+
+        g.setColor(Color.GREEN);
+        g.fillRect(pipeX, 0, 50, pipeY);
+        g.fillRect(pipeX, pipeY + 150, 50, 450);
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Score: " + score, 10, 30);
+
+        if (gameOver) {
+            g.drawString("Game Over!", 200, 300);
+        }
+    }
+
+    private void updateGame() {
+        birdY += birdSpeed;
+        birdSpeed += gravity;
+
+        pipeX -= pipeSpeed;
+
+        if (pipeX < -50) {
+            pipeX = 500;
+            pipeY = new Random().nextInt(200) + 100;
+            score++;
+        }
+
+        if (birdY > 570 || birdY < 0) {
+            gameOver = true;
+        }
+
+        if ((birdX + 30 > pipeX && birdX < pipeX + 50) && (birdY < pipeY || birdY > pipeY + 150)) {
+            gameOver = true;
+        }
+
+        repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            birdSpeed = -15;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Flappy Bird");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setSize(600, 600);
+        frame.add(new FlappyBird());
+        frame.setVisible(true);
+    }
+}
