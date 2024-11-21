@@ -1,0 +1,9 @@
+body {
+    text-align: center;
+    background-color: rgb(100, 55, 55);
+}
+
+#board {
+    background-image: url("flappybirdbg.png");
+    margin-top: 40px;
+}
