@@ -23,8 +23,8 @@ public class AppPanel extends JPanel {
 
     AppPanel() {
         setSize(500, 500);
-        car1 = new Car(30, 300, 80, 120, "car.png", 1);
-        car2 = new Car(150, 300, 80, 120, "car.png", 5);
+        // car1 = new Car(30, 300, 80, 120, "car.png", 1);
+        car2 = new Car(0, 0, 90, 113, "doremon.png", 5);
         car5 = new Car(150, 50, 80, 120, "car.png", 5);
         car3 = new Car(250, 300, 80, 120, "car.png", 2);
         car4 = new Car(360, 300, 80, 120, "car.png", 10);
@@ -79,10 +79,10 @@ public class AppPanel extends JPanel {
     protected void paintComponent(Graphics pen) {
         super.paintComponent(pen);
         // TODO Auto-generated method stub
-        car1.paintCar(pen);
+        // car1.paintCar(pen);
         car2.paintCar(pen);
-        car3.paintCar(pen);
-        car4.paintCar(pen);
-        car5.paintCar(pen);
+        // car3.paintCar(pen);
+        // car4.paintCar(pen);
+        // car5.paintCar(pen);
     }
 }

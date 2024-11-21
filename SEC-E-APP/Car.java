@@ -26,7 +26,7 @@ public class Car {
 
     void loadBgImage() {
         try {
-            carPhoto = ImageIO.read(AppPanel.class.getResource(fileName));
+            carPhoto = ImageIO.read(AppPanel.class.getResource(fileName)).getSubimage(90,113,90,113);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
