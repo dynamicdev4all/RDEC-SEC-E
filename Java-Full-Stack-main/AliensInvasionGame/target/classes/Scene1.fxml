@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" onKeyPressed="#keyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.aliensinvasiongame.Controller">
+   <children>
+      <ImageView fx:id="hero" fitHeight="45.0" fitWidth="58.0" layoutX="277.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Shooter.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="message" fill="#e20d0d" layoutX="14.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over! Press 'P' for Continue" visible="false" wrappingWidth="576.1366882324219">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
