@@ -14,15 +14,20 @@ public class AppPanel extends JPanel {
     Timer timer;
     int x = 0;
     int y = 100;
-
+    int birdX = 50;
+    int initialIndex = 0;
     Car car1;
     Car car2;
     Car car3;
     Car car4;
     Car car5;
 
+    Bird b1 = new Bird();
+    BufferedImage images[] = b1.getSingleImages();
+
     AppPanel() {
         setSize(500, 500);
+        b1 = new Bird();
         // car1 = new Car(30, 300, 80, 120, "car.png", 1);
         car2 = new Car(0, 0, 90, 113, "doremon.png", 5);
         car5 = new Car(150, 50, 80, 120, "car.png", 5);
@@ -35,11 +40,19 @@ public class AppPanel extends JPanel {
     }
 
     void appLoop() {
-        timer = new Timer(30, (abc) -> {
+        timer = new Timer(60, (abc) -> {
             // car1.moveUp();
             // car2.moveUp();
             // car3.moveUp();
             // car4.moveUp();
+            birdX += 10;
+            if (birdX > 500) {
+                birdX = -100;
+            }
+            initialIndex++;
+            if (initialIndex > 10) {
+                initialIndex = 0;
+            }
             repaint();
         });
         timer.start();
@@ -75,14 +88,23 @@ public class AppPanel extends JPanel {
         });
     }
 
+    void paintImg(Graphics pen) {
+        // for (int i = 0; i < images.length; i++) {
+        b1.paintBird(pen, images[initialIndex], birdX);
+        // birdX += 10;
+        // System.out.println(i);
+        // }
+    }
+
     @Override
     protected void paintComponent(Graphics pen) {
         super.paintComponent(pen);
         // TODO Auto-generated method stub
         // car1.paintCar(pen);
-        car2.paintCar(pen);
+        // car2.paintCar(pen);
         // car3.paintCar(pen);
         // car4.paintCar(pen);
         // car5.paintCar(pen);
+        paintImg(pen);
     }
 }
