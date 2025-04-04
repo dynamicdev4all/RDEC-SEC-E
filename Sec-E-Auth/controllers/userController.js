@@ -1,4 +1,7 @@
-const userRegister = async()=>{
+const userModel = require("../models/userModel");
+const sendMail = require("../service/sendMail");
+const userRegister = async(request ,response)=>{
+  const {username, email, password} = request.body;
     try {
         const exist = await userModel.findOne({email:email});
           if(exist){
@@ -11,7 +14,8 @@ const userRegister = async()=>{
               password:password,
               isVerified:false,
             })
-            await newUser.save();
+            // await newUser.save();
+            sendMail(email, username)
             console.log("Register Success")
           }
           }
@@ -41,6 +45,12 @@ const userLogin = async()=>{
           console.log("Register Fail ",error)
         }
 }
-const userVerification = ()=>{}
-const userLogout = ()=>{}
-const userPwdRst = ()=>{}
+const userVerification = ()=>{
+
+
+
+  
+}
+
+
+module.exports = {userRegister, userLogin, userVerification}

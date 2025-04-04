@@ -1,18 +1,16 @@
 const e = require("express");
-const mongoose = require("mongoose")
 const server = e();
+const dotenv = require('dotenv').config();
 const userRouter = require("./routes/userRoutes");
 const appRouter = require("./routes/appRoutes");
 const dbConn = require("./config/databaseConnection");
 server.use(e.urlencoded({ extended: true }));
 
-// appRouter.use("/api")
-// userRouter.use("/user")
-server.use("/api",appRouter)
+server.use("/",appRouter)
 server.use("/user",userRouter)
 
+const PORT = process.env.PORT;
 
-
-server.listen(1212, () => {
-  console.log("Server is running on port 1212");
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

@@ -1,6 +1,7 @@
 const e = require("express");
 const userRouter = e.Router();
 const path = require("path");
+const { userRegister, userLogin } = require("../controllers/userController");
 
 userRouter.get("/login", (request, response) => {
     response.sendFile(path.join(__dirname, "../public", "login.html"));
@@ -8,12 +9,11 @@ userRouter.get("/login", (request, response) => {
   userRouter.get("/register", (request, response) => {
     response.sendFile(path.join(__dirname, "../public", "register.html"));
   });
-  userRouter.post("/create-new-user", async (request, response) => {
-    const {username, email, password} =  request.body;
-  });  
-  userRouter.post("/login-user", async (request, response) => {
-    const { email, password} =  request.body;
-  });  
+  userRouter.post("/create-new-user", userRegister);  
+  userRouter.post("/login-user", userLogin);  
+
+//vgwk yfqu wksm bbhh
+
 
 
   module.exports = userRouter;
