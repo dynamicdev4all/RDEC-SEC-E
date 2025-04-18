@@ -11,12 +11,11 @@ const sendMail = (email, userName)=>{
             pass:"vgwkyfquwksmbbhh"
         }
     })
-    const token = jwt.sign({email}, JWT_SECRET, {expiresIn:"10m"})
-
+    const token = jwt.sign({email}, JWT_SECRET, {expiresIn:"3m"})
+                              //  https://www.youtube.com/watch?v=L3pj1tNN4bM
+    console.log("Sent token")
     console.log(token);
-    
-
-    const verificationLink = `http://localhost:${PORT}/verify?token=${token}`;
+    const verificationLink = `http://localhost:${PORT}/user/verify?token=${token}`;
     const mail = ({
         from : "test.duck.mail@gmail.com",
         to : email,

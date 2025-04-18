@@ -1,5 +1,8 @@
 const userModel = require("../models/userModel");
 const sendMail = require("../service/sendMail");
+const jwt = require('jsonwebtoken')
+const JWT_SECRET = process.env.JWT_SECRET;
+
 const userRegister = async(request ,response)=>{
   const {username, email, password} = request.body;
     try {
@@ -22,8 +25,9 @@ const userRegister = async(request ,response)=>{
        catch (error) {
           console.log("Register Fail ",error)
         }
-}
-const userLogin = async()=>{
+} 
+const userLogin = async(request, response)=>{
+  const {email, password} = request.body;
     try {
         const exist = await userModel.findOne({email:email});
           if(exist){
@@ -45,10 +49,27 @@ const userLogin = async()=>{
           console.log("Register Fail ",error)
         }
 }
-const userVerification = ()=>{
-
-
-
+const userVerification = async (recToken)=>{
+  try {
+    const tokenDecode = jwt.verify(recToken, JWT_SECRET)
+    const emailToBeVerified = tokenDecode.email;
+const verified =  await userModel.findOneAndUpdate(
+      {email:emailToBeVerified},
+      {isVerified : true}, 
+      {new:true}
+    )
+    if(verified.isVerified){
+      console.log("Verification Success")
+    }else{
+      console.log("Verification Failed")
+    }
+    console.log(emailToBeVerified)
+  } catch (error) {
+    if(jwt.TokenExpiredError){
+      console.log("The token is expired")
+    }
+    console.log(error)
+  }
   
 }
 
